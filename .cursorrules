@@ -1,0 +1,185 @@
+# React Native AI Template - AI Assistant Rules
+
+## Project Overview
+This is a full-stack React Native + Express.js template for building cross-platform AI applications with support for multiple LLM providers and image generation services.
+
+## Tech Stack
+- **Frontend**: React Native (Expo), TypeScript, NativeWind (Tailwind CSS)
+- **Backend**: Express.js, TypeScript
+- **UI Components**: Custom shadcn-style components built with NativeWind
+- **State Management**: React Context API, AsyncStorage
+- **Navigation**: React Navigation (Bottom Tabs, Stack)
+
+## Code Style & Conventions
+
+### TypeScript
+- Use TypeScript for all new files
+- Prefer interfaces over types for object shapes
+- Use proper type annotations, avoid `any`
+- Export types alongside components
+
+### React Native Components
+- Use functional components with hooks
+- Prefer composition over inheritance
+- Keep components small and focused (< 200 lines)
+- Use proper TypeScript props interfaces
+
+### Naming Conventions
+- Components: PascalCase (e.g., `ChatScreen.tsx`)
+- Files: camelCase for utilities, PascalCase for components
+- Hooks: prefix with `use` (e.g., `useTheme`)
+- Constants: UPPER_SNAKE_CASE
+
+### File Structure
+```
+app/
+├── src/
+│   ├── components/      # Reusable components
+│   │   └── ui/         # shadcn-style UI primitives
+│   ├── screens/        # Screen components
+│   ├── context.tsx     # React Context providers
+│   ├── theme.ts        # Theme definitions
+│   └── utils.ts        # Utility functions
+├── App.tsx             # Root component
+├── constants.ts        # App constants & models
+└── types.ts            # TypeScript type definitions
+
+server/
+├── src/
+│   ├── chat/          # LLM provider integrations
+│   ├── images/        # Image generation services
+│   ├── files/         # File upload handlers
+│   └── helpers/       # Utility functions
+└── index.ts           # Express server entry
+```
+
+## UI Components (shadcn-style with NativeWind)
+
+### Available Components
+- `Button`: Primary UI button with variants (default, destructive, outline, secondary, ghost, link)
+- `Card`: Container component with Header, Title, Description, Content, Footer
+- `Input`: Text input with error states
+- `Text`: Typography component with variants (h1-h4, p, large, small, muted)
+
+### Usage Example
+```tsx
+import { Button, Card, CardHeader, CardTitle, Input } from '@/components/ui';
+
+<Card>
+  <CardHeader>
+    <CardTitle>Login</CardTitle>
+  </CardHeader>
+  <Input placeholder="Email" />
+  <Button variant="default">Submit</Button>
+</Card>
+```
+
+### Styling
+- Use NativeWind className prop for styling
+- Follow Tailwind conventions
+- Use theme colors from tailwind.config.js
+- Prefer utility classes over custom styles
+
+## LLM Integration
+
+### Supported Providers
+- OpenAI (GPT-4, GPT Turbo)
+- Anthropic (Claude, Claude Instant)
+- Cohere (standard & web search)
+- Google (Gemini)
+- Mistral AI
+
+### Adding New Models
+1. Add model definition to `app/constants.ts`
+2. Create handler in `server/src/chat/[model].ts`
+3. Update `chatRouter.ts` with new route
+4. Implement streaming response handling
+5. Update UI in `app/src/screens/chat.tsx`
+
+## Image Generation
+
+### Supported Services
+- Fast Image (LCM) - Quick generation
+- Stable Diffusion XL - High quality
+- Remove Background - Image processing
+- Upscale - Resolution enhancement
+- Illusion Diffusion - Optical illusions
+
+### Adding New Image Models
+1. Add to `IMAGE_MODELS` in `constants.ts`
+2. Create handler in `server/src/images/[service]`
+3. Update `imagesRouter.ts`
+4. Update `app/src/screens/images.tsx`
+
+## Best Practices
+
+### Performance
+- Use `React.memo` for expensive renders
+- Implement proper list virtualization with `FlatList`
+- Lazy load images with proper placeholders
+- Debounce user input for API calls
+
+### Error Handling
+- Always wrap API calls in try-catch
+- Show user-friendly error messages
+- Log errors for debugging
+- Implement retry logic for network failures
+
+### Security
+- Never commit API keys
+- Use environment variables (.env files)
+- Validate user input on server
+- Implement rate limiting
+- Use HTTPS in production
+
+### Testing
+- Write unit tests for utilities
+- Test components with React Testing Library
+- Test API endpoints
+- Implement E2E tests for critical flows
+
+## Environment Setup
+
+### Required API Keys (server/.env)
+```
+ANTHROPIC_API_KEY=
+OPENAI_API_KEY=
+COHERE_API_KEY=
+FAL_API_KEY=
+BYTESCALE_API_KEY=
+GEMINI_API_KEY=
+REPLICATE_KEY=
+```
+
+### App Configuration (app/.env)
+```
+EXPO_PUBLIC_ENV=DEVELOPMENT
+EXPO_PUBLIC_DEV_API_URL=http://localhost:3050
+EXPO_PUBLIC_PROD_API_URL=https://your-api.com
+```
+
+## Git Workflow
+- Use conventional commits (feat:, fix:, docs:, etc.)
+- Keep commits atomic and focused
+- Write descriptive commit messages
+- Create feature branches from main
+- Use pull requests for code review
+
+## When Making Changes
+1. Check existing patterns before creating new ones
+2. Update types when changing data structures
+3. Update documentation for API changes
+4. Test on iOS, Android, and Web
+5. Ensure builds succeed before committing
+6. Run `npm run build` in server directory
+7. Verify app starts with `npm start` in app directory
+
+## AI Assistant Guidelines
+- Prefer modifying existing files over creating new ones
+- Follow established patterns in the codebase
+- Use TypeScript types consistently
+- Keep code DRY (Don't Repeat Yourself)
+- Write self-documenting code with clear names
+- Add comments for complex logic
+- Consider cross-platform compatibility
+- Test changes before suggesting completion

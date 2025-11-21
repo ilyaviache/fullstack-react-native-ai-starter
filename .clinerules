@@ -1,0 +1,163 @@
+# Cline Rules for React Native AI Template
+
+## Project Context
+Full-stack React Native + Express.js AI application template with NativeWind UI components.
+
+## Commands
+
+### Development
+- `cd app && npm start` - Start Expo dev server
+- `cd server && npm run dev` - Start Express server with hot reload
+- `cd server && npm run build` - Build TypeScript server
+
+### Build
+- `cd app && npm run ios` - Build for iOS
+- `cd app && npm run android` - Build for Android
+- `cd app && npm run web` - Build for web
+
+## File Modification Rules
+
+### Always Read First
+- Read files before editing to understand context
+- Check imports and dependencies
+- Verify type definitions
+
+### Component Creation
+```tsx
+// Template for new components
+import React from 'react';
+import { View } from 'react-native';
+
+export interface ComponentNameProps {
+  // Props interface
+}
+
+export function ComponentName({ ...props }: ComponentNameProps) {
+  return (
+    <View className="...">
+      {/* Component content */}
+    </View>
+  );
+}
+```
+
+### API Route Creation (Server)
+```typescript
+// Template for new API routes
+import { Router } from 'express';
+import asyncHandler from 'express-async-handler';
+
+const router = Router();
+
+router.post('/endpoint', asyncHandler(async (req, res) => {
+  try {
+    const { data } = req.body;
+    // Logic here
+    res.json({ success: true, data });
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: error.message });
+  }
+}));
+
+export default router;
+```
+
+## Testing Before Committing
+1. Server: `cd server && npm run build` (must succeed)
+2. App: `cd app && npm start` (should start without errors)
+3. Check TypeScript errors
+4. Verify imports are correct
+
+## Common Tasks
+
+### Adding a New Screen
+1. Create file in `app/src/screens/[name].tsx`
+2. Add to navigation in `app/src/main.tsx`
+3. Update types in `app/types.ts` if needed
+4. Use UI components from `app/src/components/ui`
+
+### Adding a New UI Component
+1. Create in `app/src/components/ui/[name].tsx`
+2. Export from `app/src/components/ui/index.ts`
+3. Use NativeWind className styling
+4. Add TypeScript interface for props
+5. Follow shadcn design patterns
+
+### Adding a New LLM Provider
+1. Create `server/src/chat/[provider].ts`
+2. Implement streaming response
+3. Add route to `server/src/chat/chatRouter.ts`
+4. Add model to `app/constants.ts`
+5. Update `app/src/screens/chat.tsx`
+6. Add icon component if needed
+
+### Adding Environment Variables
+1. Add to `server/.env.example` or `app/.env.example`
+2. Document in README.md
+3. Update TypeScript types if needed
+4. Add validation on startup
+
+## Code Patterns
+
+### API Calls (Client)
+```typescript
+const response = await fetch(`${DOMAIN}/endpoint`, {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(data)
+});
+const result = await response.json();
+```
+
+### Streaming Responses (Client)
+```typescript
+const es = new EventSource(`${DOMAIN}/endpoint`);
+es.addEventListener('message', (event) => {
+  const data = JSON.parse(event.data);
+  // Handle streamed data
+});
+```
+
+### Theme Usage
+```typescript
+import { useTheme } from './context';
+
+function Component() {
+  const { theme } = useTheme();
+  return <View style={{ backgroundColor: theme.backgroundColor }} />;
+}
+```
+
+## Error Prevention
+- Never use `any` type without good reason
+- Always handle errors in async functions
+- Validate user input
+- Check for null/undefined
+- Use optional chaining (`?.`)
+- Provide fallback values
+
+## Performance Considerations
+- Use `React.memo` for heavy components
+- Implement virtualization for long lists
+- Debounce expensive operations
+- Lazy load images
+- Minimize re-renders
+
+## Platform-Specific Code
+```typescript
+import { Platform } from 'react-native';
+
+const style = Platform.select({
+  ios: { /* iOS styles */ },
+  android: { /* Android styles */ },
+  web: { /* Web styles */ },
+});
+```
+
+## When Stuck
+1. Check existing similar implementations
+2. Review relevant documentation
+3. Test in isolation
+4. Ask for clarification if needed
+5. Provide multiple options when uncertain
