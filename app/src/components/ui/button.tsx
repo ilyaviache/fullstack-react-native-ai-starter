@@ -66,7 +66,9 @@ export function Button({
       {...props}
     >
       {loading ? (
-        <ActivityIndicator color={variant === 'default' || variant === 'destructive' ? 'white' : 'black'} />
+        <ActivityIndicator
+          color={variant === 'default' || variant === 'destructive' ? 'white' : 'black'}
+        />
       ) : typeof children === 'string' ? (
         <Text
           className={`

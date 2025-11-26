@@ -20,10 +20,7 @@ const variantStyles = {
 
 export function Text({ variant = 'p', className, children, ...props }: TextProps) {
   return (
-    <RNText
-      className={`${variantStyles[variant]} ${className || ''}`}
-      {...props}
-    >
+    <RNText className={`${variantStyles[variant]} ${className || ''}`} {...props}>
       {children}
     </RNText>
   );

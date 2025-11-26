@@ -49,18 +49,16 @@ export function CardHeader({ children, className, ...props }: CardHeaderProps) {
 
 export function CardTitle({ children, className }: CardTitleProps) {
   return (
-    <Text className={`text-2xl font-semibold leading-none tracking-tight text-card-foreground ${className || ''}`}>
+    <Text
+      className={`text-2xl font-semibold leading-none tracking-tight text-card-foreground ${className || ''}`}
+    >
       {children}
     </Text>
   );
 }
 
 export function CardDescription({ children, className }: CardDescriptionProps) {
-  return (
-    <Text className={`text-sm text-muted-foreground ${className || ''}`}>
-      {children}
-    </Text>
-  );
+  return <Text className={`text-sm text-muted-foreground ${className || ''}`}>{children}</Text>;
 }
 
 export function CardContent({ children, className, ...props }: CardContentProps) {

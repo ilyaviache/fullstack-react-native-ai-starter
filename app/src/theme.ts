@@ -4,8 +4,8 @@ const colors = {
   gray: 'rgba(0, 0, 0, .5)',
   lightWhite: 'rgba(255, 255, 255, .5)',
   blueTintColor: '#0281ff',
-  lightPink: '#F7B5CD'
-}
+  lightPink: '#F7B5CD',
+};
 
 const fonts = {
   ultraLightFont: 'Geist-Ultralight',
@@ -17,7 +17,7 @@ const fonts = {
   boldFont: 'Geist-Bold',
   blackFont: 'Geist-Black',
   ultraBlackFont: 'Geist-Ultrablack',
-}
+};
 
 const lightTheme = {
   ...fonts,
@@ -34,7 +34,7 @@ const lightTheme = {
   tintTextColor: colors.white,
   tabBarActiveTintColor: colors.black,
   tabBarInactiveTintColor: colors.gray,
-}
+};
 
 const darkTheme = {
   ...fonts,
@@ -52,7 +52,7 @@ const darkTheme = {
   tintTextColor: colors.white,
   tabBarActiveTintColor: colors.blueTintColor,
   tabBarInactiveTintColor: colors.lightWhite,
-}
+};
 
 const hackerNews = {
   ...lightTheme,
@@ -60,7 +60,7 @@ const hackerNews = {
   label: 'hackerNews',
   backgroundColor: '#e4e4e4',
   tintColor: '#ed702d',
-}
+};
 
 const miami = {
   ...darkTheme,
@@ -69,8 +69,8 @@ const miami = {
   backgroundColor: '#231F20',
   tintColor: colors.lightPink,
   tintTextColor: '#231F20',
-  tabBarActiveTintColor: colors.lightPink
-}
+  tabBarActiveTintColor: colors.lightPink,
+};
 
 const vercel = {
   ...darkTheme,
@@ -81,8 +81,6 @@ const vercel = {
   tintTextColor: colors.white,
   tabBarActiveTintColor: colors.white,
   secondaryTextColor: colors.white,
-}
+};
 
-export {
-  lightTheme, darkTheme, hackerNews, miami, vercel
-}
+export { lightTheme, darkTheme, hackerNews, miami, vercel };

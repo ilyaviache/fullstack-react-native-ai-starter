@@ -1,10 +1,10 @@
-import express from 'express'
-import multer from 'multer'
-import { falAI } from './fal'
+import express from 'express';
+import multer from 'multer';
+import { falAI } from './fal';
 
-const upload = multer()
-const router = express.Router()
+const upload = multer();
+const router = express.Router();
 
-router.post('/fal', upload.single('file'), falAI)
+router.post('/fal', upload.single('file'), falAI);
 
-export default router
+export default router;
